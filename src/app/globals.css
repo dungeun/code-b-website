@@ -94,19 +94,32 @@
 }
 
 .hero-background {
-  @apply absolute inset-0 overflow-hidden;
+  @apply absolute overflow-hidden;
+  width: 100%;        /* 모바일에서는 전체 너비 */
+  height: 100%;      
+  right: 0;          
+  
+  /* 태블릿 이상 크기에서 적용 */
+  @media (min-width: 768px) {
+    width: 50%;      /* 태블릿/데스크톱에서는 50% 너비 */
+  }
 }
 
 .hero-content {
-  @apply relative mx-auto max-w-7xl px-6 py-32 sm:py-48 lg:px-8 lg:py-56;
+  @apply relative mx-auto max-w-7xl px-6 lg:px-8;
+  padding-top: 3rem;      /* py-32에서 더 작은 값으로 변경 */
+  padding-bottom: 3rem;   /* 상황에 맞게 조절 */
 }
 
 .hero-text {
   @apply max-w-2xl text-left;
+  /* 여기에 margin-top 추가 가능 */
 }
 
 .hero-title {
   @apply text-4xl font-bold tracking-tight text-foreground sm:text-5xl;
+  /* 제목의 여백을 조절하려면 여기서 margin 추가 */
+  margin-top: 1rem;  /* 이 값을 조절하세요 */
 }
 
 .hero-description {
@@ -175,4 +188,13 @@
 
 .cta-buttons {
   @apply mt-10 flex items-center justify-center gap-x-6 lg:justify-start;
+}
+
+/* 네비게이션 스타일 */
+.nav-link-mobile {
+  @apply block rounded-lg px-3 py-2 text-lg font-semibold leading-7 text-foreground hover:bg-accent;
+}
+
+.nav-link-desktop {
+  @apply text-lg font-semibold leading-6 text-foreground;
 }

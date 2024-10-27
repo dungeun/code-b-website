@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTheme } from "next-themes"
@@ -15,6 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { ArrowRight, Code, Globe, BarChart, Menu, Sun, Moon } from "lucide-react"
+import Typed from 'typed.js'
 
 const navigation = [
   { name: 'code.APP', href: '/code-app' },
@@ -25,10 +26,27 @@ const navigation = [
 
 export default function Home() {
   const { theme, setTheme } = useTheme()
+  const el = useRef(null);
+
+  useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: ['code.B'],
+      typeSpeed: 150,
+      backSpeed: 150,
+      backDelay: 10000,
+      loop: true,
+      showCursor: true,
+      cursorChar: '_'
+    });
+
+    return () => {
+      typed.destroy();
+    };
+  }, []);
 
   React.useEffect(() => {
-    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    setTheme(isDarkMode ? 'dark' : 'light')
+    // 라이트모드를 기본값으로 설정:
+    setTheme('light')
   }, [setTheme])
 
   return (
@@ -39,7 +57,7 @@ export default function Home() {
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">code.B</span>
-              <span className="text-2xl font-bold">code.B</span>
+              <span ref={el} className="text-3xl font-bold"></span>
             </Link>
           </div>
           <div className="flex lg:hidden">
@@ -64,7 +82,7 @@ export default function Home() {
                         <Link
                           key={item.name}
                           href={item.href}
-                          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-foreground hover:bg-accent"
+                          className="nav-link-mobile"
                         >
                           {item.name}
                         </Link>
@@ -94,7 +112,11 @@ export default function Home() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12 items-center">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-foreground">
+              <Link 
+                key={item.name} 
+                href={item.href} 
+                className="nav-link-desktop"
+              >
                 {item.name}
               </Link>
             ))}
@@ -217,7 +239,7 @@ export default function Home() {
                 구독 서비스로 지속적인 혁신을<br />경험해보세요.
               </h2>
               <p className="cta-description">
-                전문 개발팀을 채용한 것과 유사한 혜택을 제공하는 구독형 기술 지원 서비스로, 지속적인 기술 업데이트, 버그 수정, 신규 기능 추가 등으로 귀사의 기술 혁신을 유지할 수 있도록 돕습니다.
+                전문 개발팀을 채용한 것과 유사한 혜택을 제공하는 구독형 기술 지원 서스로, 지속적 기술 업데이트, 버그 수정, 신규 기능 추가 등으로 귀사의 기술 혁신을 유지할 수 있도록 돕습니다.
               </p>
               <div className="cta-buttons">
                 <Button asChild>
