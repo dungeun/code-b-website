@@ -39,8 +39,26 @@ jobs:
           echo "$SERVER_SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $SERVER_USER@$SERVER_IP '
-            docker stop $(docker ps -q --filter ancestor=cheon43/codeb:latest) 2>/dev/null || true
-            docker rm $(docker ps -aq --filter ancestor=cheon43/codeb:latest) 2>/dev/null || true
+            # 기존 컨테이너 정리
+            docker stop codeb-prod 2>/dev/null || true
+            docker rm codeb-prod 2>/dev/null || true
+            
+            # 이전 이미지 제거
+            docker rmi cheon43/codeb:latest 2>/dev/null || true
+            
+            # 새 이미지 풀
             docker pull cheon43/codeb:latest
-            docker run -d -p 8080:3000 --restart unless-stopped cheon43/codeb:latest
+            
+            # 새 컨테이너 실행
+            docker run -d \
+              -p 80:3000 \
+              --name codeb-prod \
+              --restart unless-stopped \
+              cheon43/codeb:latest
+            
+            # 컨테이너 상태 확인
+            docker ps
+            echo "Waiting for container to start..."
+            sleep 10
+            docker logs codeb-prod
           '
