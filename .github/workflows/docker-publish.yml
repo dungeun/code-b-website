@@ -15,9 +15,9 @@ jobs:
 
       - name: SSH to Server and Deploy
         env:
-          SERVER_IP: ${{ secrets.SERVER_IP }}  # 141.164.62.149는 비밀로 설정됨
-          SERVER_USER: ${{ secrets.SERVER_USER }}  # root는 비밀로 설정됨
-          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}  # SSH 키는 비밀로 설정됨
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
         run: |
           echo "$SERVER_SSH_KEY" > key.pem
           chmod 600 key.pem
