@@ -179,7 +179,7 @@ export default function Home() {
       <section className="services-section">
         <div className="services-content">
           <div className="services-header">
-            <h2 className="text-3xl font-semibold leading-7 text-indigo-600">Our Services</h2>
+            <h2 className="text-4xl font-semibold leading-7 text-indigo-600">Our Services</h2>
             <p className="services-title">
               Everything you need to accelerate your business
             </p>
