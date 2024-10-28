@@ -147,7 +147,7 @@
 }
 
 .services-title {
-  @apply mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl;
+  @apply mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-3xl;
 }
 
 .services-description {
